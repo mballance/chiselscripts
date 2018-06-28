@@ -2,7 +2,7 @@
 CHISELSCRIPTS_SCRIPTS_DIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 CHISELSCRIPTS_DIR := $(abspath $(CHISELSCRIPTS_SCRIPTS_DIR)/..)
 BUILD_DIR := $(CHISELSCRIPTS_DIR)/build
-PACKAGES_DIR := $(CHISELSCRIPTS_DIR)/packages
+PACKAGES_DIR ?= $(CHISELSCRIPTS_DIR)/packages
 LIB_DIR := $(CHISELSCRIPTS_DIR)/lib
 FIRRTL_VERSION=1.1.1
 FIRRTL_URL=https://github.com/freechipsproject/firrtl/archive/v$(FIRRTL_VERSION).tar.gz
