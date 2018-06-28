@@ -17,15 +17,30 @@ PS=:
 
 # Bring in the version
 include $(CHISELSCRIPTS_DIR)/etc/ivpm.info
+-include $(PACKAGES_DIR)/packages.mk
 
 JAVA=java
 SBT := $(JAVA) -jar $(CHISELSCRIPTS_SCRIPTS_DIR)/sbt-launch.jar
+
+RULES := 1
 
 build : \
 	$(LIB_DIR)/scala.jar \
 	$(LIB_DIR)/support.jar \
 	$(LIB_DIR)/firrtl.jar \
 	$(LIB_DIR)/chisel3.jar 
+
+ifeq (true,$(PHASE2))
+clean : 
+	$(Q)rm -rf $(LIB_DIR)
+	$(Q)rm -rf $(BUILD_DIR)/$(CHISEL3_DIR)
+	$(Q)rm -rf $(BUILD_DIR)/$(FIRRTL_DIR)
+	$(Q)rm -rf $(BUILD_DIR)/scala_libs
+	$(Q)rm -rf $(BUILD_DIR)/support_libs
+	$(Q)rm -rf $(BUILD_DIR)/*.unpack
+else
+clean : clean_chiselscripts
+endif
 
 release : build
 	$(Q)rm -rf $(BUILD_DIR)/chiselscripts
@@ -145,3 +160,4 @@ $(LIB_DIR)/firrtl.jar : $(BUILD_DIR)/firrtl.unpack
           fi \
         done
 
+-include $(PACKAGES_DIR)/packages.mk
