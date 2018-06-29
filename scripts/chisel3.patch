@@ -1,0 +1,14 @@
+*** chisel3-3.1.1/build.sbt	2018-06-20 11:00:08.000000000 -0700
+--- chisel3-3.1.1.sav/build.sbt	2018-06-29 08:05:22.927788720 -0700
+***************
+*** 45,50 ****
+--- 45,53 ----
+    ),
+    scalacOptions := Seq("-deprecation", "-feature") ++ scalacOptionsVersion(scalaVersion.value),
+    libraryDependencies += "org.scala-lang" % "scala-reflect" % scalaVersion.value,
++   libraryDependencies ++= Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value),
++   libraryDependencies ++= Seq("org.json4s" %% "json4s-jackson" % "3.5.3"),
++ 
+    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+    // Use the root project's unmanaged base for all sub-projects.
+    unmanagedBase := (unmanagedBase in root).value,

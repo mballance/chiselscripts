@@ -78,6 +78,8 @@ $(LIB_DIR)/scala.jar : $(LIB_DIR)/chisel3.jar $(LIB_DIR)/firrtl.jar
 $(BUILD_DIR)/chisel3.unpack : $(CHISEL3_TGZ)
 	$(Q)if test ! -d `dirname $@`; then mkdir -p `dirname $@`; fi
 	$(Q)cd $(BUILD_DIR) ; tar xvzf $(CHISEL3_TGZ)
+	$(Q)cd $(BUILD_DIR)/$(CHISEL3_DIR) ; \
+          patch -p1 < $(CHISELSCRIPTS_SCRIPTS_DIR)/chisel3.patch
 	$(Q)touch $@
 
 $(CHISEL3_TGZ) :
